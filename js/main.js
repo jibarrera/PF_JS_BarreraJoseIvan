@@ -68,14 +68,14 @@ const arrayDePostres = [
         id : 1007,
         nombre : "Salted Caramel Brownie",
         precio: 2500,
-        imagen: "./img/img08.jpg",
+        imagen: "/img/img08.jpeg",
     },
 
     {
         id : 1008,
         nombre : "Vanilla Panna Cotta",
         precio: 1200,
-        imagen: "img/img09.jpg",
+        imagen: "img/img09.jpeg",
     },
 
 ];
@@ -99,11 +99,12 @@ function verCarrito(){
 function crearCard(producto){
     const card = document.createElement("div");
     card. className = "card";
-    card.innerHTML = producto.imagen;
+    //card.innerHTML = producto.imagen;
 
 
     const imagen = document.createElement('img');
-    imagen.innerHTML = `${producto.img}`;
+    imagen.src = producto.imagen;
+    card.imagen = producto.imagen;
 
 
     const title = document.createElement("h1");
