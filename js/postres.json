@@ -1,0 +1,69 @@
+
+ [
+    {
+        "id": 1000,
+        "nombre": "Waffle with Berries",
+        "precio": 4000,
+        "imagen": "img/img01.jpg"
+    },
+
+    {
+        "id":1001,
+        "nombre" : "Vanilla Bean Crème Brûlée",
+        "precio": 7500,
+        "imagen": "img/img02.jpg"
+        
+    },
+
+    {
+        "id": 1002,
+        "nombre" : "Macaron Mix of Five",
+        "precio": 1500,
+        "imagen": "img/img03.jpg"
+    },
+
+    {
+        "id" : 1003,
+        "nombre" : "Classic Tiramisu",
+        "precio": 4500,
+        "imagen": "img/img04.jpg"
+    },
+
+    {
+        "id ": 1004,
+        "nombre" : "Pistachio Baklava",
+        "precio": 2800,
+        "imagen": "img/img05.jpg"
+    },
+
+    
+    {
+        "id" : 1005,
+        "nombre" : "Lemon Meringue Pie",
+        "precio": 2800,
+        "imagen": "img/img06.jpg"
+    },
+
+     {
+        "id" : 1006,
+        "nombre" : "Red Velvet Cake",
+        "precio": 2000,
+        "imagen": "img/img07.jpg"
+    },
+
+    
+    {
+        "id" : 1007,
+        "nombre" : "Salted Caramel Brownie",
+        "precio": 2500,
+        "imagen": "/img/img08.jpeg"
+    },
+
+    {
+        "id" : 1008,
+        "nombre" : "Vanilla Panna Cotta",
+        "precio": 1200,
+        "imagen": "img/img09.jpeg"
+    }
+
+]

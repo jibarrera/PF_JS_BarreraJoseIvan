@@ -1,14 +1,21 @@
-const container = document.getElementById("container");
+//let productos = [];
+
+fetch("./js/postres.json")
+    .then(response => response.json())
+    .then(data => {
+        const postres = data.results;
+        agregarAlCarrito(postres);
+         productos = [];
+         productos.forEach(el => {
+             crearCard(el);
+         });
+     })
+     .catch(error => {
+         console.error("Error cargando el JSON:", error);
+     });
 
 
-let  carrito;
-
-if(JSON.parse(localStorage.getItem("carrito"))){
-    carrito = JSON.parse(localStorage.getItem("carrito"))
-
-}else{
-    carrito = [];
-}
+let carrito = [];
 
 
 const arrayDePostres = [
@@ -80,23 +87,68 @@ const arrayDePostres = [
 
 ];
 
+const container = document.getElementById("container");
+const botonesAgregar = document. querySelectorAll(".btn");
+const numerito = document.querySelector("#numerito");
 
 
-function agregarAlCarrito(producto){
-    //console.log(`Compraste ${producto.nombre}`);
-    //console.log(`Precio:  $${producto.precio}`);
-    carrito.push(producto);
-    //localStorage.setItem("carrito", JSON.stringify(carrito));
-    alert(`Agregaste ${producto.nombre} correctamente al carrito`);
+let productosEnCarrito;
+
+let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
+
+
+if(productosEnCarritoLS){
+     productosEnCarrito = JSON.parse(productosEnCarritoLS);
+    actualizarNumerito();
+
+}else{
+
+    productosEnCarrito = [];
 
 }
 
-function verCarrito(){
-    console.log("Este es tu carrito");
-    console.log(carrito);
+
+function agregarAlCarrito(el) {
+
+
+    const nombreBoton = el.nombre;
+
+    const productoAgregado = arrayDePostres.find(el => el.nombre === nombreBoton);
+    //console.log(productoAgregado);
+
+     if(productosEnCarrito.some(el => el.nombre === nombreBoton)){
+
+
+        const index = productosEnCarrito.findIndex(el => el.nombre === nombreBoton);
+
+        productosEnCarrito[index].cantidad++;
+
+     } else {
+        productoAgregado.cantidad = 1;
+        productosEnCarrito.push(productoAgregado);
+     }
+
+
+     actualizarNumerito();
+     //console.log(productosEnCarrito);
+
+
+     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+
 }
 
-function crearCard(producto){
+
+
+//Funcion que me permite agregar cantidades de productos seleccionados y sumarlo a medida que se agregan prodcutos al carrito.
+
+function actualizarNumerito() {
+    let nuevoNumerito = productosEnCarrito.reduce((acc, el) => acc + el.cantidad, 0);
+    numerito.innerText = nuevoNumerito;
+    //console.log(nuevoNumerito);
+}
+
+
+   function crearCard(producto){
     const card = document.createElement("div");
     card. className = "card";
     //card.innerHTML = producto.imagen;
@@ -116,8 +168,9 @@ function crearCard(producto){
     price.className = "card-price";
 
     const botonComprar = document.createElement("button");
-    botonComprar.innerText = "Comprar";
+    botonComprar.innerText = "Agregar";
     botonComprar.className = "btn";
+    botonComprar.id = "id";
     botonComprar.addEventListener("click", () => agregarAlCarrito(producto));
 
     card.appendChild(title);
@@ -128,16 +181,11 @@ function crearCard(producto){
 
     container.appendChild(card);
 
-}
+};
       
 arrayDePostres.forEach(el => {
 
     crearCard(el);
-
+   
 
 });
-
-
-const botonCarrito = document.getElementById("btn-carrito");
-
-botonCarrito.addEventListener("click", ( ) => verCarrito());
